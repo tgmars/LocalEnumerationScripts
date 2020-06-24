@@ -1,3 +1,4 @@
+<!-- Powershell template -->
 function Get-ExampleData {
     [CmdletBinding()]
     param()
@@ -15,3 +16,12 @@ function Get-ExampleData {
     }
 }
 
+<!-- Batch template -->
+@echo off
+SETLOCAL ENABLEEXTENSIONS
+SETLOCAL ENABLEDELAYEDEXPANSION
+
+echo "file_function.bat"
+command > .\batch\output\filename.ext
+
+<!-- Bash template -->
