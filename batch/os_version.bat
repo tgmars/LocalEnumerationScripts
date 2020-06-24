@@ -1,2 +1,2 @@
 echo "--- os_version.bat ---"
-wmic os get version /VALUE
+wmic OS GET Version /FORMAT:CSV > .\batch\output\os_version.csv
