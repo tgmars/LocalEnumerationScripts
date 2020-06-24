@@ -8,23 +8,24 @@
 #>
 
 # $PSVersion = Get-Host.Version
-Write-Host("Current Powershell Version: " + $PSVersionTable.PSVersion)
+# Write-Host("Current Powershell Version: " + $PSVersionTable.PSVersion)
 
-Get-ChildItem "./powershell" -Filter "*.psm1" -File | ForEach-Object {
-    Import-Module $_.FullName -Force
-}
-
-Get-OSVersion   
-Get-OSPatchLevel
-Get-Timestamp
-Get-TZ
-# Get-InstalledSoftware
-# Get-Services
-# Get-Processes
-Get-UserAccounts
-# Get-AdminAccounts
-
-
-# Get-ChildItem "./batch" -Filter "*.bat" -File | ForEach-Object {
-#     cmd.exe /c $_.FullName
+# Get-ChildItem "./powershell" -Filter "*.psm1" -File | ForEach-Object {
+#     Import-Module $_.FullName -Force
 # }
+
+# Get-OSVersion   
+# Get-OSPatchLevel
+# Get-Timestamp
+# Get-TZ
+# # Get-InstalledSoftware
+# # Get-Services
+# # Get-Processes
+# Get-UserAccounts
+# # Get-AdminAccounts
+
+
+# Batch startup
+Get-ChildItem "./batch" -Filter "*.bat" -File | ForEach-Object {
+    .$_.FullName
+}
