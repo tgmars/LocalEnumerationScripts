@@ -1,0 +1,6 @@
+@echo off
+SETLOCAL ENABLEEXTENSIONS
+SETLOCAL ENABLEDELAYEDEXPANSION
+
+echo "accounts.bat"
+wmic USERACCOUNT LIST FULL /FORMAT:CSV > .\batch\output\accounts.csv
