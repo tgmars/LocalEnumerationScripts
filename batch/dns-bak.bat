@@ -24,15 +24,13 @@ call:resetFields
 :: Output headers to our csv
 :: Ensure that these headers match fields as you've defined them in :resetFields
 echo RecordName,RecordType,TTL,DataLength,Section,ARecord,PTRRecord,CNAMERecord > .\batch\output\dns.csv
-
 :: Optional, display length of lines with content for testing
 :: lenCmdOutput
 call:splitStrings %outputVar% %lenCmdOutput% 
 ENDLOCAL 
 
-:setCmdOutput    
-::               -- Store the output of the command specified in param 1 in an array named by param 2.
-::               -- %~1: command to store output of
+:setCmdOutput    -- Store the output of the command specified in %~1 in an array named cmdOutput
+::                 -- %~1: command to store output of
     SETLOCAL ENABLEDELAYEDEXPANSION
     set "count=0"
     for /F "usebackq delims= tokens=*" %%f in (`%~1`) do (
@@ -52,8 +50,7 @@ ENDLOCAL
     )
 GOTO:EOF
 
-:getLength          
-REM -- Gets array length
+:getLength          -- Gets array length
 ::                  -- Usage:
 ::                  -- %~1 Name of array
 ::                  -- %~2 Output variable
@@ -75,8 +72,7 @@ REM -- Gets array length
     ) 
 GOTO:EOF
 
-:splitStrings       
-REM -- Custom logic for parsing the specific output of the command
+:splitStrings
     echo Splitting strings
     echo array to split is called: %~1
     echo length of array to split: %~2
@@ -91,14 +87,14 @@ REM -- Custom logic for parsing the specific output of the command
             call:splitString !currentline! 
             if NOT "!bodyvalue!" == "!cnamerecord!" ( set "recordname=!bodyvalue!" )
         )
-        if "!firstSevenChars!" == "DataLen" ( call:splitString !currentline! & set "datalength=!bodyvalue!")
-        if "!firstSevenChars!" == "RecordT" ( call:splitString !currentline! & set "recordtype=!bodyvalue!")
-        if "!firstSevenChars!" == "TimeToL" ( call:splitString !currentline! & set "timetolive=!bodyvalue!")
-        if "!firstSevenChars!" == "Section" ( call:splitString !currentline! & set "section=!bodyvalue!")
-        if "!firstSevenChars!" == "A(Host)" ( call:splitString !currentline! & set "arecord=!bodyvalue!")
-        if "!firstSevenChars!" == "PTRReco" ( call:splitString !currentline! & set "ptrrecord=!bodyvalue!")
-        if "!firstSevenChars!" == "CNAMERe" ( call:splitString !currentline! & set "cnamerecord=!bodyvalue!")
-        :: If you hit a record name that is your CNAME, don't the
+        if "!firstSevenChars!" == "DataLen" ( call:splitString !currentline! : & set "datalength=!bodyvalue!")
+        if "!firstSevenChars!" == "RecordT" ( call:splitString !currentline! : & set "recordtype=!bodyvalue!")
+        if "!firstSevenChars!" == "TimeToL" ( call:splitString !currentline! : & set "timetolive=!bodyvalue!")
+        if "!firstSevenChars!" == "Section" ( call:splitString !currentline! : & set "section=!bodyvalue!")
+        if "!firstSevenChars!" == "A(Host)" ( call:splitString !currentline! : & set "arecord=!bodyvalue!")
+        if "!firstSevenChars!" == "PTRReco" ( call:splitString !currentline! : & set "ptrrecord=!bodyvalue!")
+        if "!firstSevenChars!" == "CNAMERe" ( call:splitString !currentline! : & set "cnamerecord=!bodyvalue!")
+        
         :: If we hit a separator line in the dns output, dump our current info out to file & reset our fields
         if "!firstSevenChars!" == "-------" if NOT "!recordname!" == "nil" ( 
             echo !recordname!,!recordtype!,!timetolive!,!datalength!,!section!,!arecord!,!ptrrecord!,!cnamerecord! >> .\batch\output\dns.csv
@@ -107,23 +103,14 @@ REM -- Custom logic for parsing the specific output of the command
     )
 GOTO:EOF
 
-:splitString        
-REM -- Returns the second half of a string split on param 2, in this case a colon.
-::                  -- The result will be returned into a variable named bodyvalue.
-::                  -- Usage:
-::                  -- %~1 Value of line to split
-::                  -- %~2 Character to split on
+:splitString
     REM echo string to split %~1
     REM echo string to split on %~2
     set "bodyvalue=!%~1!"
-    echo ibrokesplit
     REM set firstSplit
 GOTO:EOF
 
-:resetFields        
-REM -- Sets the specified variables to 'nil'. 
-::                  -- Use this to intialise the variables used to store data parsed
-::                  -- from command line outputs before they're written to file.
+:resetFields
     set "recordname=nil"
     set "datalength=nil"
     set "recordtype=nil"
