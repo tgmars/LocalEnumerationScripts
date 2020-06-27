@@ -15,18 +15,26 @@ call:setCmdOutput %command% %outputVar%
 set /a lenCmdOutput=0
 SETLOCAL ENABLEDELAYEDEXPANSION 
 call:getLength %outputVar% lenCmdOutput
+
+:: the first call to resetFields sets the variables for use later on.
+:: call reset fields after each block of data is parsed.
+:: IMPORTANT - modify the fields in resetFields for the headers of data that you're parsing
+call:resetFields
+
+:: Output headers to our csv
+:: Ensure that these headers match fields as you've defined them in :resetFields
+echo RecordName,RecordType,TTL,DataLength,Section,ARecord,PTRRecord,CNAMERecord > .\batch\output\dns.csv
+
 :: Optional, display length of lines with content for testing
 :: lenCmdOutput
 call:splitStrings %outputVar% %lenCmdOutput% 
 ENDLOCAL 
 
-:: Output headers to our csv
-REM echo RecordName,RecordType,TTL,DataLength,Section,PTRRecord,ARecord,CNAMERecord > .\batch\output\dns.csv
-
 :setCmdOutput    -- Store the output of the command specified in %~1 in an array named cmdOutput
 ::                 -- %~1: command to store output of
     SETLOCAL ENABLEDELAYEDEXPANSION
     set "count=0"
+    ipconfig /displaydns
     for /F "usebackq delims= tokens=*" %%f in (`%~1`) do (
         :: double quotes around %%f ensures we get the whole line and don't break on the first whitespace
         REM call:incrementCount "%%f"
@@ -75,51 +83,42 @@ GOTO:EOF
         REM Remove spaces while we're at it (using : =)     
         set currentline=!%~1[%%n]: =!
 
-        set Header8=!currentline:~0,7!
+        set firstSevenChars=!currentline:~0,7!
         set "bodyvalue=nil"
-        if "!Header8!" == "RecordN" ( call:splitString !bodyvalue! !currentline! : & set bodyvalue)
-        if "!Header8!" == "DataLen" ( call:splitString !bodyvalue! !currentline! : & set bodyvalue)
-        if "!Header8!" == "RecordT" ( call:splitString !bodyvalue! !currentline! : & set bodyvalue)
-        if "!Header8!" == "TimeToL" ( call:splitString !bodyvalue! !currentline! : & set bodyvalue)
-        if "!Header8!" == "Section" ( call:splitString !bodyvalue! !currentline! : & set bodyvalue)
-        if "!Header8!" == "A(Host)" ( call:splitString !bodyvalue! !currentline! : & set bodyvalue)
-        if "!Header8!" == "PTRReco" ( call:splitString !bodyvalue! !currentline! : & set bodyvalue)
-        if "!Header8!" == "CNAMERe" ( call:splitString !bodyvalue! !currentline! : & set bodyvalue)
-
-        REM set !bodyvalue!
-        REM set "recordname=!currentline:RecordName=!"
-        REM set "rnf=!recordname:*:=!"
-        REM set "recordtype=!currentline:RecordType=!"
-        REM set "ttl=!currentline:TimeToLive=!"
-        REM set "section=!currentline:Section=!"        
-        REM set "arecord=!currentline:A(Host)Record=!"            
-        REM set "ptrrecord=!currentline:PTRRecord=!"            
-        REM set "cnamerecord=!currentline:CNameRecord=!"            
-        REM echo !rnf!
-
-
-        REM Should produce: .......:your.data.here
-        REM echo !content!
-        REM set "header=!currentline:=!"
-        REM echo !header!
-        REM  Should produce: currentline-content = RecordName
+        if "!firstSevenChars!" == "RecordN" ( call:splitString !bodyvalue! !currentline! : & set "recordname=!bodyvalue!")
+        if "!firstSevenChars!" == "DataLen" ( call:splitString !bodyvalue! !currentline! : & set "datalength=!bodyvalue!")
+        if "!firstSevenChars!" == "RecordT" ( call:splitString !bodyvalue! !currentline! : & set "recordtype=!bodyvalue!")
+        if "!firstSevenChars!" == "TimeToL" ( call:splitString !bodyvalue! !currentline! : & set "timetolive=!bodyvalue!")
+        if "!firstSevenChars!" == "Section" ( call:splitString !bodyvalue! !currentline! : & set "section=!bodyvalue!")
+        if "!firstSevenChars!" == "A(Host)" ( call:splitString !bodyvalue! !currentline! : & set "arecord=!bodyvalue!")
+        if "!firstSevenChars!" == "PTRReco" ( call:splitString !bodyvalue! !currentline! : & set "ptrrecord=!bodyvalue!")
+        if "!firstSevenChars!" == "CNAMERe" ( call:splitString !bodyvalue! !currentline! : & set "cnamerecord=!bodyvalue!")
+        
+        :: If we hit a separator line in the dns output, dump our current info out to file & reset our fields
+        if "!firstSevenChars!" == "-------" ( 
+            echo !recordname!,!recordtype!,!timetolive!,!datalength!,!section!,!arecord!,!ptrrecord!,!cnamerecord! >> .\batch\output\dns.csv
+            call:resetFields
+        )
     )
 GOTO:EOF
 
 :splitString
     REM echo string to split %~1
     REM echo string to split on %~2
-    set "firstSplit=!%~2!"
-    set "%~1=firstSplit"
+    set "bodyvalue=!%~2!"
     REM set firstSplit
 GOTO:EOF
 
-REM :splitStringSecond
-REM     echo string to split second %~1
-REM     echo string to split on second %~2
-REM     set "secondSplit=!%~2!"
-REM     set secondSplit
-REM GOTO:EOF
+:resetFields
+    set "recordname=nil"
+    set "datalength=nil"
+    set "recordtype=nil"
+    set "timetolive=nil"
+    set "section=nil"
+    set "arecord=nil"
+    set "ptrrecord=nil"
+    set "cnamerecord=nil"
+GOTO:EOF
 
 REM Refs:
 REM https://www.programming-books.io/essential/batch/functions-f516efa981d9481ca4253d271451381d
