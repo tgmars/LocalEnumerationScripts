@@ -1,4 +1,5 @@
 
+@echo off
 dir \\.\pipe\\
 
 REM Refs:

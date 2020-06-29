@@ -3,28 +3,28 @@
 ## Tasks to complete
 
 - Operating System and Version - done
-- Operating System Patch Level - done, but could be more granular
-- Current Timestamp - done
-- Current Timezone - done
-- Installed Applications/packages - done
-- Process snapshot - done
-- Services snapshot - done
-- Current User Accounts 
-- Current Admin Accounts
-- Login History
-- ARP History
-- Network Connections
-- Network Interfaces
-- DNS History
-- Scheduled Tasks/CronJobs
-- Firewall Settings
-- USB History
-- Recently Accessed Files
+- Operating System Patch Level - done, but could be more granular (wmi)
+- Current Timestamp - done (wmi)
+- Current Timezone - done (wmi)
+- Installed Applications/packages - done (reg, to the jankest csv ever)
+- Process snapshot - done (wmi)
+- Services snapshot - done (wmi)
+- Current User Accounts - done (wmi)
+- Current Admin Accounts - done (wmi)
+- Login History - wip (eventquery.vbs)
+- ARP History - done (arp -a)
+- Network Connections -done (netstat)
+- Network Interfaces - done (wmi)
+- DNS History - done (ipconfig /displaydns)
+- Scheduled Tasks/CronJobs - done
+- Firewall Settings (reg) 
+- USB History wip (reg, need alternative to parsing spaces)
+- Recently Accessed Files (reg)
 - Retrieve File Content
-- Named Pipes
-- Prefetch Files
+- Named Pipes - wip (dir, need to investigate further & csv out)
+- Prefetch Files - 
 - Group Policy Configuration
-- Autoruns
+- Autoruns - done (wmi)
 - Command Line History
 
 ## Requirements

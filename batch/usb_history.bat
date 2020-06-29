@@ -2,17 +2,16 @@
 
 SETLOCAL ENABLEDELAYEDEXPANSION 
 
-echo "software.bat"
+echo "usb_history.bat"
 REM echo displayname,installdate,publisher  > .\batch\output\software.csv
 REM reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" /s | findstr /B ".*DisplayName .*InstallDate .*Publisher" >> .\batch\output\software.csv
 REM reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall" /s | findstr /B ".*DisplayName .*InstallDate .*Publisher" >> .\batch\output\software.csv
 set "regOutput="""
 set "currentRegKey="""
-set "outputFile=.\batch\output\software.csv"
+set "outputFile=.\batch\output\usb.csv"
 echo key,param,value > !outputFile!
 
-call:setAllRegKeyValuesToStruct HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall 
-call:setAllRegKeyValuesToStruct HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall
+call:setAllRegKeyValuesToStruct HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR 
 
 ENDLOCAL
 
@@ -46,3 +45,5 @@ GOTO:EOF
 GOTO:EOF
 
 ENDLOCAL
+
+
