@@ -4,6 +4,7 @@ REM Start of main execution
 echo scheduled_tasks.bat
 REM Specify the command to execute
 schtasks /Query /V /FO:CSV > .\batch\output\schtasks.csv
+REM Note - will produce an error if there are no scheduled tasks.
 
 REM Refs:
 REM The Win32_ScheduledJob WMI class represents a job created with the AT command.

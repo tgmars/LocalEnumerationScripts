@@ -6,7 +6,7 @@
 - Operating System Patch Level - done, but could be more granular (wmi)
 - Current Timestamp - done (wmi)
 - Current Timezone - done (wmi)
-- Installed Applications/packages - done (reg, to the jankest csv ever)
+- Installed Applications/packages - done (reg, to the jankest csv ever, may need to revist)
 - Process snapshot - done (wmi)
 - Services snapshot - done (wmi)
 - Current User Accounts - done (wmi)
