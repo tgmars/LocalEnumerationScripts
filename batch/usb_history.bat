@@ -1,52 +1,8 @@
-@echo off
-
-REM SETLOCAL ENABLEDELAYEDEXPANSION 
-
-REM echo "usb_history.bat"
-REM REM echo displayname,installdate,publisher  > .\batch\output\software.csv
-REM set "regOutput="""
-REM set "currentRegKey="""
-REM set "outputFile=.\batch\output\usb.csv"
-REM echo key,param,value > !outputFile!
-
-REM call:setAllRegKeyValuesToStruct "HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR"
-
-REM ENDLOCAL
-
-REM :setAllRegKeyValuesToStruct
-REM     REM The skip here might cause issues with reg on XP - keep an eye out for it.Will probably need skip=4 on XP.
-REM     REM Should try to split on PCRE - REG_[A-Z]+\s
-REM     for /f "tokens=1,2,* skip=1 delims= " %%A in ('reg query %~1 /s') do (
-REM             set bodyline=%%A
-REM             set firstSevenChars=!bodyline:~0,7!
-REM             REM set firstSevenChars
-
-REM             if "!firstSevenChars!" == "HKEY_LO" ( 
-REM                 set "currentRegKey=!bodyline!"
-REM             )
-REM             REM Put subkeys that you want to ignore in here (typically because they've used a space in the subkey name)
-REM             REM The inno installer does this. Need the REM in the following block to ensure that the script still executes, can't have
-REM             REM an empty if statement. 
-REM             if "!firstSevenChars!" == "Inno" ( REM
-REM             ) else (
-REM                 set regOutput.!currentRegKey!.%%A=%%C
-REM             )
-REM     )
-REM     call:writeStructToCSV !outputfile!
-REM GOTO:EOF
-
-REM :writeStructToCSV
-REM     set "varattr=regOutput"
-REM     FOR /F "usebackq tokens=1,2,3,4 delims=.=" %%a IN (`set`) DO if "%%a"=="%varattr%" (
-REM         if NOT %%b == "" ( echo %%b,%%c,%%d >> %~1 )
-REM     )
-REM GOTO:EOF
-
-REM ENDLOCAL
 
 
 @echo off
-SETLOCAL
+SETLOCAL ENABLEDELAYEDEXPANSION 
+SETLOCAL ENABLEEXTENSIONS
 
 REM Start of main execution
 echo usb_history.bat
@@ -156,30 +112,22 @@ REM                  -- %~1 Value of line to split
 REM                  -- %~2 Character to split on
     REM echo string to split %~1
     REM echo string to split on %~2
-    set "tempvar=%~1"
-    
+    set tempvar=%~1
+    set tempvar=!tempvar:"=!
+    set "tempsubkey=nil"
     set "tempvalue=!tempvar:*REG_DWORD=!"
     set "tempvalue=!tempvalue:*REG_SZ=!"
     set "tempvalue=!tempvalue:*REG_MULTI_SZ=!"
-    REM set "tempvalue=!tempvalue:*REG_BINARY=DONOTPARSEME!"
+    set "tempvalue=!tempvalue:*REG_EXPAND_SZ=!"
+
     if "!tempvalue!"=="!tempvalue:REG_BINARY=!" (
-            set "tempsubkey=!tempvar:REG_MULTI_SZ%tempvalue%=!"
-            set "tempsubkey=!tempsubkey:REG_DWORD%tempvalue%=!"
-            set "tempsubkey=!tempsubkey:REG_SZ%tempvalue%=!"
+        REM Remove quotes from any of the values
+        set "tempsubkey=!tempvar:REG_MULTI_SZ%tempvalue%=!"
+        set "tempsubkey=!tempsubkey:REG_DWORD%tempvalue%=!"
+        set "tempsubkey=!tempsubkey:REG_SZ%tempvalue%=!"
+        set "tempsubkey=!tempsubkey:REG_EXPAND_SZ%tempvalue%=!"
     ) else (
         REM
-    )
-    REM set firstSevenTempValue=!tempvalue:~0,7!
-    REM if NOT %tempvalue% == "" (
-    REM     echo !firstSevenTempValue! 
-    REM     if !firstSevenTempValue! == DONOTPA (
-    REM         echo notparsing
-    REM     ) else (
-    REM         set "tempsubkey=!tempvar:REG_MULTI_SZ%tempvalue%=!"
-    REM         set "tempsubkey=!tempsubkey:REG_DWORD%tempvalue%=!"
-    REM         set "tempsubkey=!tempsubkey:REG_SZ%tempvalue%=!"
-    REM     )
-
     )
     set subkey=!tempsubkey!
     set value=!tempvalue!

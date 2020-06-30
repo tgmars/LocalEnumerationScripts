@@ -1,25 +1,7 @@
 @echo off
 
 SETLOCAL ENABLEDELAYEDEXPANSION 
-
-REM echo "software.bat"
-REM REM echo displayname,installdate,publisher  > .\batch\output\software.csv
-REM REM reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" /s | findstr /B ".*DisplayName .*InstallDate .*Publisher" >> .\batch\output\software.csv
-REM REM reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall" /s | findstr /B ".*DisplayName .*InstallDate .*Publisher" >> .\batch\output\software.csv
-REM set "regOutput="""
-REM set "currentRegKey="""
-REM set "outputFile=.\batch\output\software.csv"
-REM echo key,param,value > !outputFile!
-
-REM echo Parsing HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall 
-REM call:setAllRegKeyValuesToStruct HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall 
-REM REM SOFTWARE\Wow6432Node potentially not applicable for XP
-REM echo Parsing HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall
-REM call:setAllRegKeyValuesToStruct HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall
-
-REM ENDLOCAL
-
-@echo off
+SETLOCAL ENABLEEXTENSIONS
 SETLOCAL
 
 REM Start of main execution
@@ -57,7 +39,7 @@ REM               -- %~1: command to store output of
 REM               -- %~2: variable to store command output in
     SETLOCAL ENABLEDELAYEDEXPANSION
     set "count=0"
-    for /F "usebackq delims= tokens=*" %%f in (`%~1`) do (
+    for /F "usebackq delims= tokens=*" %%f in (`%~1 ^| findstr "HKEY_LOCAL Publisher InstallDate DisplayName"`) do (
         REM double quotes around %%f ensures we get the whole line and don't break on the first whitespace
         REM call:incrementCount "%%f"
         set %~2[!count!]=%%f
@@ -130,13 +112,16 @@ REM                  -- %~1 Value of line to split
 REM                  -- %~2 Character to split on
     REM echo string to split %~1
     REM echo string to split on %~2
-    set "tempvar=%~1"
+    set tempvar=%~1
+    set tempvar=!tempvar:"=!
+    set "tempsubkey=nil"
     set "tempvalue=!tempvar:*REG_DWORD=!"
     set "tempvalue=!tempvalue:*REG_SZ=!"
     set "tempvalue=!tempvalue:*REG_MULTI_SZ=!"
     set "tempvalue=!tempvalue:*REG_EXPAND_SZ=!"
 
     if "!tempvalue!"=="!tempvalue:REG_BINARY=!" (
+        REM Remove quotes from any of the values
         set "tempsubkey=!tempvar:REG_MULTI_SZ%tempvalue%=!"
         set "tempsubkey=!tempsubkey:REG_DWORD%tempvalue%=!"
         set "tempsubkey=!tempsubkey:REG_SZ%tempvalue%=!"
@@ -144,7 +129,6 @@ REM                  -- %~2 Character to split on
     ) else (
         REM
     )
-
     set subkey=!tempsubkey!
     set value=!tempvalue!
 GOTO:EOF
@@ -158,6 +142,22 @@ REM                  -- from command line outputs before they're written to file
     set "value=nil"
 GOTO:EOF
 
+REM echo "software.bat"
+REM REM echo displayname,installdate,publisher  > .\batch\output\software.csv
+REM REM reg query "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall" /s | findstr /B ".*DisplayName .*InstallDate .*Publisher" >> .\batch\output\software.csv
+REM REM reg query "HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall" /s | findstr /B ".*DisplayName .*InstallDate .*Publisher" >> .\batch\output\software.csv
+REM set "regOutput="""
+REM set "currentRegKey="""
+REM set "outputFile=.\batch\output\software.csv"
+REM echo key,param,value > !outputFile!
+
+REM echo Parsing HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall 
+REM call:setAllRegKeyValuesToStruct HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall 
+REM REM SOFTWARE\Wow6432Node potentially not applicable for XP
+REM echo Parsing HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall
+REM call:setAllRegKeyValuesToStruct HKLM\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall
+
+REM ENDLOCAL
 
 REM :setAllRegKeyValuesToStruct
 REM     REM The skip here might cause issues with reg on XP - keep an eye out for it.Will probably need skip=4 on XP.

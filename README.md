@@ -6,7 +6,7 @@
 - Operating System Patch Level - done, but could be more granular (wmi)
 - Current Timestamp - done (wmi)
 - Current Timezone - done (wmi)
-- Installed Applications/packages - done (reg, to the jankest csv ever, may need to revist)
+- Installed Applications/packages - done (reg,finally)
 - Process snapshot - done (wmi)
 - Services snapshot - done (wmi)
 - Current User Accounts - done (wmi)
@@ -18,7 +18,7 @@
 - DNS History - done (ipconfig /displaydns)
 - Scheduled Tasks/CronJobs - done
 - Firewall Settings (reg) 
-- USB History wip (reg, need alternative to parsing spaces)
+- USB History done (reg)
 - Recently Accessed Files (reg)
 - Retrieve File Content
 - Named Pipes - wip (dir, need to investigate further & csv out)
