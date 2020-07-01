@@ -24,7 +24,7 @@
 # Get-UserAccounts
 # # Get-AdminAccounts
 
-
+mkdir .\batch\output
 # Batch startup
 Get-ChildItem "./batch" -Filter "*.bat" -File | ForEach-Object {
     .$_.FullName
