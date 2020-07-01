@@ -6,7 +6,7 @@
 - Operating System Patch Level - done, but could be more granular (wmi)
 - Current Timestamp - done (wmi)
 - Current Timezone - done (wmi)
-- Installed Applications/packages - done (reg,finally)
+- Installed Applications/packages - done (reg)
 - Process snapshot - done (wmi)
 - Services snapshot - done (wmi)
 - Current User Accounts - done (wmi)
@@ -16,14 +16,14 @@
 - Network Connections -done (netstat)
 - Network Interfaces - done (wmi)
 - DNS History - done (ipconfig /displaydns)
-- Scheduled Tasks/CronJobs - done
-- Firewall Settings - wip (reg) 
+- Scheduled Tasks/CronJobs - done (wmi)
+- Firewall Settings - done (reg)
 - USB History - done (reg)
-- Recently Accessed Files - done (reg)
-- Retrieve File Content - BA (N/A in batch)
-- Named Pipes - NA (dir, need to investigate further & csv out) (not happening in batch`)
-- Prefetch Files - done 
-- Group Policy Configuration - done
+- Recently Accessed Files - done (dir)
+- Retrieve File Content - N/A in batch
+- Named Pipes - N/A in batch
+- Prefetch Files - done (dir)
+- Group Policy Configuration - done (gpresult)
 - Autoruns - done (wmi)
 - Command Line History - done (doskey /history)
 
