@@ -22,7 +22,7 @@
 - Recently Accessed Files (reg)
 - Retrieve File Content
 - Named Pipes - wip (dir, need to investigate further & csv out)
-- Prefetch Files - 
+- Prefetch Files - done 
 - Group Policy Configuration
 - Autoruns - done (wmi)
 - Command Line History

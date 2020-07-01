@@ -26,7 +26,6 @@ for /L %%n in (1 1 !count!) do (
     )
 ) 
 
-
 REM Alternative method that runs arp for each search, a lot faster, but a lot grosser.
 REM Duplicates a lot of info, needs fine tuning if it's going to be used.
 
