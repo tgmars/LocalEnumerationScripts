@@ -11,21 +11,21 @@
 - Services snapshot - done (wmi)
 - Current User Accounts - done (wmi)
 - Current Admin Accounts - done (wmi)
-- Login History - wip (eventquery.vbs)
+- Login History - done (eventquery.vbs)
 - ARP History - done (arp -a)
 - Network Connections -done (netstat)
 - Network Interfaces - done (wmi)
 - DNS History - done (ipconfig /displaydns)
 - Scheduled Tasks/CronJobs - done
-- Firewall Settings (reg) 
-- USB History done (reg)
-- Recently Accessed Files (reg)
-- Retrieve File Content
-- Named Pipes - wip (dir, need to investigate further & csv out)
+- Firewall Settings - wip (reg) 
+- USB History - done (reg)
+- Recently Accessed Files - done (reg)
+- Retrieve File Content - BA (N/A in batch)
+- Named Pipes - NA (dir, need to investigate further & csv out) (not happening in batch`)
 - Prefetch Files - done 
-- Group Policy Configuration
+- Group Policy Configuration - done
 - Autoruns - done (wmi)
-- Command Line History
+- Command Line History - done (doskey /history)
 
 ## Requirements
 - Bash - Ubuntu 10.04 or Centos 5.4
