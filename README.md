@@ -3,6 +3,38 @@
 ## Tasks to complete
 
 - Operating System and Version - done
+- Operating System Patch Level - done
+- Current Timestamp - done
+- Current Timezone - done
+- Installed Applications/packages - done
+- Process snapshot - done
+- Services snapshot - done
+- Current User Accounts  - done
+- Current Admin Accounts - done
+- Login History - done
+- ARP History - done
+- Network Connections - done
+- Network Interfaces - done
+- DNS History - done
+- Scheduled Tasks/CronJobs - done
+- Firewall Settings - done
+- USB History - 
+- Recently Accessed Files - done
+- Retrieve File Content - 
+- Named Pipes - 
+- Prefetch Files 
+- Group Policy Configuration -
+- Autoruns 
+- Command Line History - 
+
+## Requirements
+- Bash - Ubuntu 10.04 or Centos 5.4
+- Batch - Windows XP Service Pack 3
+- PowerShell - Version 3, load .NET functionality if req'd, can use sysinternals if justified, need style guide.  
+
+
+#### Batch
+- Operating System and Version - done
 - Operating System Patch Level - done, but could be more granular (wmi)
 - Current Timestamp - done (wmi)
 - Current Timezone - done (wmi)
@@ -26,8 +58,3 @@
 - Group Policy Configuration - done (gpresult)
 - Autoruns - done (wmi)
 - Command Line History - done (doskey /history)
-
-## Requirements
-- Bash - Ubuntu 10.04 or Centos 5.4
-- Batch - Windows XP Service Pack 3
-- PowerShell - Version 3, load .NET functionality if req'd, can use sysinternals if justified, need style guide.  
