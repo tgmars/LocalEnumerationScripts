@@ -18,14 +18,14 @@
 - DNS History - done
 - Scheduled Tasks/CronJobs - done
 - Firewall Settings - done
-- USB History - 
+- USB History - done (dmesg)
 - Recently Accessed Files - done
-- Retrieve File Content - 
-- Named Pipes - 
-- Prefetch Files 
-- Group Policy Configuration -
-- Autoruns 
-- Command Line History - 
+- Retrieve File Content - done
+- Named Pipes - done
+- Prefetch Files - N/A
+- Group Policy Configuration - N/A (get /etc)
+- Autoruns - done
+- Command Line History - done 
 
 ## Requirements
 - Bash - Ubuntu 10.04 or Centos 5.4
