@@ -1,4 +1,8 @@
 function Get-OSPatchLevel {
+    <#
+    .SYNOPSIS
+        Returns patch level of the current system by enumerating OS build number and QFE hotfixes.
+    #>
     [CmdletBinding()]
     param()
     begin {
