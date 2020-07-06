@@ -7,25 +7,26 @@
     and if applicable runs bash scripts.
 #>
 
-# $PSVersion = Get-Host.Version
-# Write-Host("Current Powershell Version: " + $PSVersionTable.PSVersion)
+Write-Host("Current Powershell Version: " + $PSVersionTable.PSVersion)
 
-# Get-ChildItem "./powershell" -Filter "*.psm1" -File | ForEach-Object {
-#     Import-Module $_.FullName -Force
-# }
-
-# Get-OSVersion   
-# Get-OSPatchLevel
-# Get-Timestamp
-# Get-TZ
-# # Get-InstalledSoftware
-# # Get-Services
-# # Get-Processes
-# Get-UserAccounts
-# # Get-AdminAccounts
-
-mkdir .\batch\output
-# Batch startup
-Get-ChildItem "./batch" -Filter "*.bat" -File | ForEach-Object {
-    .$_.FullName
+# Iterate through all the modules and force reload them
+Get-ChildItem "./powershell" -Filter "*.psm1" -File | ForEach-Object {
+    Import-Module $_.FullName -Force
 }
+
+Write-Object(Get-OSVersion)
+Write-Object(Get-OSPatchLevel)
+Write-Object(Get-Timestamp)
+Write-Object(Get-TZ)
+# Write-Object(Get-InstalledSoftware)
+# Write-Object(Get-Services)
+# Write-Object(Get-Processes)
+Write-Object(Get-UserAccounts)
+Write-Object(Get-AdminAccounts)
+
+
+# mkdir .\batch\output
+# # Batch startup
+# Get-ChildItem "./batch" -Filter "*.bat" -File | ForEach-Object {
+#     .$_.FullName
+# }
