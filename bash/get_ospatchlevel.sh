@@ -11,4 +11,4 @@
 echo "Get patch levels - Copying dpkg.log and apt history.log to output"
 
 cp /var/log/dpkg.log ./output/dpkg.log
-cp /var/log/apt/history.log ./output/dpkg.log
+cp /var/log/apt/history.log ./output/apthistory.log
