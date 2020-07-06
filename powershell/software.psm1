@@ -5,7 +5,7 @@ function Get-InstalledSoftware {
         Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)
     }
     process {
-        $localVariable = (Get-CimInstance -ClassName Win32_Product) | Select-Object Name, PackageName, InstallDate, InstallSource
+        $localVariable = (Get-CimInstance -ClassName Win32_Product) | Select-Object Name, PackageName, Version, Vendor, InstallDate, InstallSource
         Write-Host($localVariable)
 
         # Stub
