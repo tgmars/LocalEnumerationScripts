@@ -21,8 +21,8 @@ done < <( lsb_release -a )
 # array_to_csv $1 ... echos an arrays values separated by columns on a single line
 array_to_csv () {
     localArray=("$@")
-    for index in "${localArray[@]}"; do printf "%s," $index | tee -a ./output/osversion.csv; done
-    printf "\n" | tee -a ./output/osversion
+    for index in "${localArray[@]}"; do printf "%s," $index >> ./output/osversion.csv; done
+    printf "\n" >> ./output/osversion
 }
 
 # Write each of the 'rows' out to csv.
@@ -38,7 +38,7 @@ kernelRelease=$(uname -r)
 kernelVersion=$(uname -v)
 machineArchitecture=$(uname -m)
 printf "hostname,kernelname,kernelrelease,kernelversion,machinearchitecture\n%s,%s,%s,%s,%s" \
-    "$hostname" "$kernelName" "$kernelRelease" "$kernelVersion" "$machineArchitecture" | tee -a ./output/kernel.csv
+    "$hostname" "$kernelName" "$kernelRelease" "$kernelVersion" "$machineArchitecture" >> ./output/kernel.csv
 
 
 

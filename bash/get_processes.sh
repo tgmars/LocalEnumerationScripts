@@ -27,4 +27,4 @@
 #     printf "%s,%s\n" "${package[i]}" "${version[i]}" | tee -a ./output/software.csv
 # done
 
-ps -ef | tee ./output/processes.txt
+ps -ef > ./output/processes.txt
