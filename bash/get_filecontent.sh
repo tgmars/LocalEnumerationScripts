@@ -3,7 +3,7 @@
 #the file to the current directory. Prompts the user if the hash has changed in the process
  
 if [ "$1" == "" ]; then
-    printf "Positional parameter 1 is empty.\n"
+    printf "Get_Filecontent: You must specify a file to copy in position 1.\n"
     exit 1
 fi
 
