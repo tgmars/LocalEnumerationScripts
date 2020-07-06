@@ -5,8 +5,13 @@ function Get-OSPatchLevel {
         Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)
     }
     process {
-        $localVariable = (Get-CimInstance -ClassName Win32_OperatingSystem).BuildNumber
-        Write-Host($localVariable)
+        return [PSCustomObject]$PatchLevel=@{
+            BuildNumber=(Get-CimInstance -ClassName Win32_OperatingSystem).BuildNumber;
+            Patches=(Get-CimInstance -ClassName Win32_QuickFixEngineering) | Select-Object HotfixID, InstalledBy, InstalledOn
+        }
+        # return $PatchLevel        
+
+        # Write-Host($PatchLevel | Format-List | Out-String)
     }
     end {
     }
