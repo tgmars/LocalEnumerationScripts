@@ -1,12 +1,12 @@
 # LocalEnumerationScripts
 
 ## Tasks to complete (Powershell)
-- Operating System and Version -
-- Operating System Patch Level -
-- Current Timestamp -
-- Current Timezone -
-- Installed Applications/packages -
-- Process snapshot -
+- Operating System and Version - done (CIM Win32_OS)
+- Operating System Patch Level - done (CIM QFE)
+- Current Timestamp - done (Get date)
+- Current Timezone - done (Get timezone)
+- Installed Applications/packages - done (Uninstall REG keys)
+- Process snapshot - done (CIM Win32_Process and .NET System.Diagnostics.Process)
 - Services snapshot -
 - Current User Accounts  -
 - Current Admin Accounts -
