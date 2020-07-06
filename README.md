@@ -1,31 +1,30 @@
 # LocalEnumerationScripts
 
-## Tasks to complete
-
-- Operating System and Version - done
-- Operating System Patch Level - done
-- Current Timestamp - done
-- Current Timezone - done
-- Installed Applications/packages - done
-- Process snapshot - done
-- Services snapshot - done
-- Current User Accounts  - done
-- Current Admin Accounts - done
-- Login History - done
-- ARP History - done
-- Network Connections - done
-- Network Interfaces - done
-- DNS History - done
-- Scheduled Tasks/CronJobs - done
-- Firewall Settings - done
-- USB History - done (dmesg)
-- Recently Accessed Files - done
-- Retrieve File Content - done
-- Named Pipes - done
-- Prefetch Files - N/A
-- Group Policy Configuration - N/A (get /etc)
-- Autoruns - done
-- Command Line History - done 
+## Tasks to complete (Powershell)
+- Operating System and Version -
+- Operating System Patch Level -
+- Current Timestamp -
+- Current Timezone -
+- Installed Applications/packages -
+- Process snapshot -
+- Services snapshot -
+- Current User Accounts  -
+- Current Admin Accounts -
+- Login History -
+- ARP History -
+- Network Connections -
+- Network Interfaces -
+- DNS History -
+- Scheduled Tasks/CronJobs -
+- Firewall Settings -
+- USB History - 
+- Recently Accessed Files -
+- Retrieve File Content -
+- Named Pipes -
+- Prefetch Files 
+- Group Policy Configuration - 
+- Autoruns -
+- Command Line History - 
 
 ## Requirements
 - Bash - Ubuntu 10.04 or Centos 5.4
