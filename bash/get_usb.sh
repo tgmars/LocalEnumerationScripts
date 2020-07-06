@@ -24,4 +24,4 @@ dmesg_with_human_timestamps () {
         fi
     done
 }
-dmesg_with_human_timestamps | grep -i usb | tee ./output/usb_history.txt
+dmesg_with_human_timestamps | grep -i usb > ./output/usb_history.txt
