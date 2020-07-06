@@ -2,11 +2,23 @@
 
 # Use last for each user
 
-printf "username,groups" > ./output/accounts.csv
+successfullogins="./output/successfullogins.txt"
+failedlogins="./output/failedlogins.txt"
+
+if [ -f $successfullogins ]; then
+    rm $successfullogins
+    touch $successfullogins
+fi
+
+if [ -f $failedlogins ]; then
+    rm  $failedlogins
+    touch $failedlogins
+fi
+
 for username in $(getent passwd | awk -F":" '{ print $1}') 
 do
-    sudo last $username | grep -v wtmp >> ./output/recentlogins.txt
-    sudo lastb $username | grep -v wtmp >> ./output/badlogins.txt
+    sudo last $username 2>/dev/null | grep -v wtmp >> $successfullogins
+    sudo lastb $username 2>/dev/null | grep -v wtmp >> $failedlogins
 done
 
 awk -f last24hours.awk /var/log/auth.log 
