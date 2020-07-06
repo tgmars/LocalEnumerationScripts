@@ -50,7 +50,7 @@
 - DNS History - done (ipconfig /displaydns)
 - Scheduled Tasks/CronJobs - done (wmi)
 - Firewall Settings - done (reg)
-- USB History - done (reg)
+- USB History - done (reg) - Need to add USBSTOR key
 - Recently Accessed Files - done (dir)
 - Retrieve File Content - N/A in batch
 - Named Pipes - N/A in batch
@@ -58,3 +58,29 @@
 - Group Policy Configuration - done (gpresult)
 - Autoruns - done (wmi)
 - Command Line History - done (doskey /history)
+
+#### Bash
+- Operating System and Version - done (lsb_release -a)
+- Operating System Patch Level - done (apt/history.log and dpkg.log)
+- Current Timestamp - done (date)
+- Current Timezone - done (date and /etc/timezone)
+- Installed Applications/packages - done (dpkg)
+- Process snapshot - done (ps)
+- Services snapshot - done (services --status-all and initctl )
+- Current User Accounts  - done (getent passwd & groups)
+- Current Admin Accounts - done (getent passwd & groups)
+- Login History - done (auth.log)
+- ARP History - done (arp -a)
+- Network Connections - done (netstat)
+- Network Interfaces - done (ip link show)
+- DNS History - done (/etc/hosts)
+- Scheduled Tasks/CronJobs - done (crontabs)
+- Firewall Settings - done (iptables)
+- USB History - done (dmesg)
+- Recently Accessed Files - done (find)
+- Retrieve File Content - done (dd)
+- Named Pipes - done (find)
+- Prefetch Files - N/A
+- Group Policy Configuration - N/A (get /etc)
+- Autoruns - done (.bash*, /etc/local.rc /etc/profile)
+- Command Line History - done (history and ~/.bash_history)
