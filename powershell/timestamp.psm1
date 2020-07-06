@@ -1,17 +1,19 @@
 function Get-Timestamp {
+    <#
+    .SYNOPSIS
+        Returns a PSObject with param TimeStamp containing a UTC timestamp
+    #>
     [CmdletBinding()]
     param()
     begin {
         Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)
     }
     process {
-        $localVariable = (Get-Date).ToUniversalTime()
-        Write-Host($localVariable)
-
-        # Stub
-        # $lvJSON = ConvertTo-Json($localVariable)
     }
     end {    
+        return [PSCustomObject]$TS=@{
+            TimeStamp=(Get-Date).ToUniversalTime()
+        }
     }
 }
 
