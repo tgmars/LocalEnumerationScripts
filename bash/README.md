@@ -21,7 +21,7 @@
 - USB History - done (dmesg)
 - Recently Accessed Files - done
 - Retrieve File Content - done
-- Named Pipes - 
+- Named Pipes - done
 - Prefetch Files - N/A
 - Group Policy Configuration - N/A (get /etc)
 - Autoruns - done

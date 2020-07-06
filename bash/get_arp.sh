@@ -2,5 +2,5 @@
 # 
 
 arpVar=$(arp -a) 
-printf "%s\n" "$arpVar"  | tee ./output/arp.txt
+printf "%s\n" "$arpVar" > ./output/arp.txt
 

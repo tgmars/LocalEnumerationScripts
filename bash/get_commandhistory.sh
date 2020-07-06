@@ -1,3 +1,3 @@
 #!/bin/bash -e
 
-history | tee ./output/command_history.txt
+history > ./output/command_history.txt

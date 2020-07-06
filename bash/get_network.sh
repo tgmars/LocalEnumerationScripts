@@ -4,10 +4,10 @@
 
 # a for all, u for udp, t for tcp and p for pid/program name
 netstatVar=$(sudo netstat -autp)
-printf "%s\n" "$netstatVar" | tee ./output/netconns.txt
+printf "%s\n" "$netstatVar" > ./output/netconns.txt
 
 routingTable=$(netstat -r)
-printf "%s\n" "$routingTable" | tee ./output/routingtable.txt
+printf "%s\n" "$routingTable" > ./output/routingtable.txt
 
 interfaces=$(ip link show)
-printf "%s\n" "$interfaces" | tee ./output/interfaces.txt
+printf "%s\n" "$interfaces" > ./output/interfaces.txt
