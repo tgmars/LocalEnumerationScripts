@@ -5,5 +5,5 @@
 
 dateVar=$(date --rfc-3339='seconds') 
 textTZ=$(cat /etc/timezone)
-printf "datetime,texttimezone\n%s,%s\n" "$dateVar" "$textTZ" | tee ./output/datetimezone.txt
+printf "datetime,texttimezone\n%s,%s\n" "$dateVar" "$textTZ" > ./output/datetimezone.txt
 
