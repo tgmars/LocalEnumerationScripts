@@ -11,6 +11,10 @@ do
         printf "@prop\nuser=%s\n" $uname > ./output/autoruns.txt
         for bashConfig in /home/$uname/.bash*
         do
+            # exclude bash_history if it exists
+            if [ "$bashConfig" == "/home/$uname/.bash_history"  ]; then
+                continue;
+            fi
             filename=$(basename "$bashConfig")
             printf "@prop\ntype=%s\n" $filename >> ./output/autoruns.txt 
             cat $bashConfig >> ./output/autoruns.txt
