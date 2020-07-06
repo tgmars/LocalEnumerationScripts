@@ -6,15 +6,15 @@ function Get-ExampleData {
         Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)
     }
     process {
-        $localVariable = Get-CimInstance Win32_OperatingSystem 
-        Write-Host($localVariable)
-
-        # Stub
-        # $lvJSON = ConvertTo-Json($localVariable)
     }
     end {
+        return [PSCustomObject]$PatchLevel=@{
+            BuildNumber=(Get-CimInstance -ClassName Win32_OperatingSystem).BuildNumber;
+            Patches=(Get-CimInstance -ClassName Win32_QuickFixEngineering) | Select-Object HotfixID, InstalledBy, InstalledOn
     }
 }
+Export-ModuleMember -Function Get-ExampleData
+
 
 <!-- Batch template -->
 @echo off
