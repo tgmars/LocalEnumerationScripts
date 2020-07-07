@@ -18,28 +18,29 @@ function Get-Pipes {
         $Pipes=@()
         # return [System.IO.Directory]::GetFiles("\\.\\pipe\\")
         # (get-childitem \\.\pipe\) | gm
-        $PipeListing=(Get-ChildItem -Path \\.\pipe\) | Select-Object Name
+        $PipeListing=[System.IO.Directory]::GetFiles("\\.\\pipe\\")
         foreach ($pipe in $PipeListing) {
+            Write-Host($pipe)
             $PipeProc=-999999     
             $ProcName='unknown'       
             
-            if ($pipe.Name -like "*pshost*") {
-                $PipeProc=$pipe.Name.Split('.')[2]
+            if ($pipe -like "*pshost*") {
+                $PipeProc=$pipe.Split('.')[3]
                 $ProcName=Get-Process -Id $PipeProc | Select-Object Name
             }
 
-            if ($pipe.Name -like "*mojo*") {
-                $PipeProc=$pipe.Name.Split('.')[1]
+            if ($pipe -like "*mojo*") {
+                $PipeProc=$pipe.Split('.')[2]
                 $ProcName=Get-Process -Id $PipeProc | Select-Object Name
             }
 
-            if ($pipe.Name -like "*winpty*") {
-                $PipeProc=$pipe.Name.Split('-')[2]
+            if ($pipe -like "*winpty*") {
+                $PipeProc=$pipe.Split('-')[2]
                 $ProcName=Get-Process -Id $PipeProc | Select-Object Name
             }
 
             $Pipes+=[PSCustomObject]@{
-                Name=$pipe.Name
+                Name=$pipe
                 AssociatedPID=$PipeProc
                 AssociatedProcName=$ProcName.Name
             }
