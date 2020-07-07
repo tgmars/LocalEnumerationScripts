@@ -7,9 +7,9 @@
 - Current Timezone - done (Get timezone)
 - Installed Applications/packages - done (Uninstall REG keys)
 - Process snapshot - done (CIM Win32_Process and .NET System.Diagnostics.Process)
-- Services snapshot -
-- Current User Accounts  -
-- Current Admin Accounts -
+- Services snapshot -done (CIM Win32_Service)
+- Current User Accounts  - done (CIM Win32_UserAccount)
+- Current Admin Accounts - done (CIM Win32_UserAccount & Get-LocalGroup)
 - Login History -
 - ARP History -
 - Network Connections -
@@ -17,14 +17,14 @@
 - DNS History -
 - Scheduled Tasks/CronJobs -
 - Firewall Settings -
-- USB History - 
+- USB History - wip
 - Recently Accessed Files -
-- Retrieve File Content -
-- Named Pipes -
+- Retrieve File Content - Wip - need to do ADS and Stat
+- Named Pipes - Done (GC & references to Get-Process where a PID can be enumerated)
 - Prefetch Files 
 - Group Policy Configuration - 
-- Autoruns -
-- Command Line History - 
+- Autoruns - 
+- Command Line History - done (get-history and contents of psreadline files)
 
 ## Requirements
 - Bash - Ubuntu 10.04 or Centos 5.4
