@@ -20,9 +20,9 @@ Write-Object(Get-Timestamp)
 Write-Object(Get-TZ)
 # Write-Object(Get-InstalledSoftware)
 # Write-Object(Get-Services)
-Write-NestedObject(Get-Processes)
-# Write-Object(Get-UserAccounts)
-# Write-Object(Get-AdminAccounts)
+# Write-NestedObject(Get-Processes)
+# Write-Object(Get-Accounts)
+Write-Object(Get-GroupsAndUsers)
 
 # mkdir .\batch\output
 # # Batch startup

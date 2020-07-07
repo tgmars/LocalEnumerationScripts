@@ -10,13 +10,7 @@ function Get-Processes {
     param()
     begin {
         Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)
-
-
-    }
-    process {
-    }
-    end {
-
+        
         $Props=@{
             Classname=  "Win32_Process";
             Property=   "ProcessId",
@@ -26,6 +20,10 @@ function Get-Processes {
                         "CreationDate";
             Filter=     "ProcessId = $pid";
         }
+    }
+    process {
+    }
+    end {
         $PIDs=Get-Process | Select-Object Id
         
         $CurrentProcs=@()
