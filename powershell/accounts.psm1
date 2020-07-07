@@ -1,4 +1,4 @@
-function Get-UserAccounts {
+function Get-Accounts {
     <#
     .SYNOPSIS
         Return all user accounts of the current host. If run on a workstation or server,
@@ -33,8 +33,10 @@ function Get-UserAccounts {
                         "LocalAccount",
                         "AccountType",
                         "Description",
+                        "InstallDate",
                         "SID",
-                        "Status"
+                        "Status",
+                        "PasswordExpires";
         }
 
         $SvcAccProps =@{
@@ -46,30 +48,32 @@ function Get-UserAccounts {
     process {
     }
     end {
-        $UserAccounts=@()
+        $Accounts=@()
 
         $Win32UserAccounts=(Get-CimInstance @UserAccProps) 
         foreach ($account in $Win32UserAccounts) {
-            $UserAccounts+=[PSCustomObject]@{
+            $Accounts+=[PSCustomObject]@{
                 Type="Win32_UserAccount"
                 Domain=$account.Domain;
                 Name=$account.Name;
                 LocalAccount=$account.LocalAccount;
                 AccountType=$AccountTypeMap[$account.AccountType];
-                CreationDate=$account.Description;
+                Description=$account.Description;
+                CreationDate=$account.InstallDate;
                 SID=$account.SID;
+                PasswordExpires=$account.PasswordExpires;
                 Status=$account.Status;
             }
         }
 
-        $Win32ServiceAccounts= (Get-CimInstance @$SvcAccProps) | Select-Object StartName -Unique 
+        $Win32ServiceAccounts= (Get-CimInstance @SvcAccProps) | Select-Object StartName -Unique 
         foreach ($account in $Win32ServiceAccounts) {
-            $UserAccounts+=[PSCustomObject]@{
+            $Accounts+=[PSCustomObject]@{
                 Type="Win32_ServiceAccount";
                 Name=$account.StartName;
             }
         }
-        return $UserAccounts
+        return $Accounts
     }
 }
-Export-ModuleMember -Function Get-UserAccounts
+Export-ModuleMember -Function Get-Accounts
