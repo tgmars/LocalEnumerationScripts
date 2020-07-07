@@ -22,8 +22,11 @@ function Get-Services {
             State=$Win32Services | Select-Object State;
             Status=$Win32Services | Select-Object Status;
             Systemname=$Win32Services | Select-Object SystemName;
-            Startmode=$Win32Services | Select-Object StartMode
+            Startmode=$Win32Services | Select-Object StartMode;
+            ServiceAccount=$Win32Services | Select-Object StartName
+
         }
     }
 }
+Export-ModuleMember -Function Get-Services
 
