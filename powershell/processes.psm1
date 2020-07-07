@@ -10,24 +10,29 @@ function Get-Processes {
     param()
     begin {
         Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)
+
+
     }
     process {
     }
     end {
+
         $Props=@{
+            Classname=  "Win32_Process";
             Property=   "ProcessId",
                         "ParentProcessId",
                         "ExecutablePath",
                         "CommandLine",
-                        "CreationDate",
-                        "ProcessName",
+                        "CreationDate";
+            Filter=     "ProcessId = $pid";
         }
         $PIDs=Get-Process | Select-Object Id
         
         $CurrentProcs=@()
 
         foreach ($pid in $PIDs.Id){
-            $Win32Proc=Get-CimInstance -ClassName Win32_Process -Filter "ProcessId = $pid" @Props
+            # $Filter=@{Filter="ProcessId = $pid"}
+            $Win32Proc=Get-CimInstance @Props 
             $DotNETProc=[System.Diagnostics.Process]::GetProcessById($pid)
             $CurrentProcs+=[PSCustomObject]@{
                 PID=$Win32Proc.ProcessId;
