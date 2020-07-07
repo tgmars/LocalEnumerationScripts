@@ -14,15 +14,19 @@ Get-ChildItem "./powershell" -Filter "*.psm1" -File | ForEach-Object {
     Import-Module $_.FullName -Force
 }
 
-Write-Object(Get-OSVersion)
-Write-Object(Get-OSPatchLevel)
-Write-Object(Get-Timestamp)
-Write-Object(Get-TZ)
+# Write-Object(Get-OSVersion)
+# Write-Object(Get-OSPatchLevel)
+# Write-Object(Get-Timestamp)
+# Write-Object(Get-TZ)
 # Write-Object(Get-InstalledSoftware)
 # Write-Object(Get-Services)
 # Write-NestedObject(Get-Processes)
 # Write-Object(Get-Accounts)
-Write-Object(Get-GroupsAndUsers)
+# Write-Object(Get-GroupsAndUsers)
+# Write-Object(Get-USBDevices)
+# Write-Object(Get-Pipes)
+# Write-Object(Get-CommandHistory)
+Get-FileContent "C:\Users\Mars\Desktop\1\2.jpg" "C:\Users\Mars\Desktop\1\amplifirouter.jpg"
 
 # mkdir .\batch\output
 # # Batch startup
