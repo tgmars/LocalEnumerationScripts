@@ -11,12 +11,7 @@ function Get-GroupsAndUsers {
     param()
     begin {
         Import-Module ActiveDirectory
-        Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)
-
-        # AccountType vallues returned by CIM class Win32_UserAccount are uint32
-        # These only match on accountTypes that map nicely to one of the following flags
-        # Should write some logic to calculate the account types for a given set of flags that
-        # don't have an entry in the map.        
+        Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)     
     }
     process {
     }
