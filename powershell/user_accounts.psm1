@@ -15,6 +15,9 @@ function Get-UserAccounts {
         Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)
 
         # AccountType vallues returned by CIM class Win32_UserAccount are uint32
+        # These only match on accountTypes that map nicely to one of the following flags
+        # Should write some logic to calculate the account types for a given set of flags that
+        # don't have an entry in the map.
         $AccountTypeMap = @{
             [uint32]256 = "UF_TEMP_DUPLICATE_ACCOUNT";
             [uint32]512 = "UF_NORMAL_ACCOUNT";
@@ -22,17 +25,30 @@ function Get-UserAccounts {
             [uint32]4096 = "UF_WORKSTATION_TRUST_ACCOUNT";
             [uint32]8192 = "UF_SERVER_TRUST_ACCOUNT"
         }
-        
-        # These only match on accountTypes that map nicely to one of the following flags
-        # Should write some logic to calculate the account types for a given set of flags that
-        # don't have an entry in the map.
+                
+        $UserAccProps =@{
+            ClassName=  "Win32_UserAccount";
+            Property=   "Domain",
+                        "Name",
+                        "LocalAccount",
+                        "AccountType",
+                        "Description",
+                        "SID",
+                        "Status"
+        }
+
+        $SvcAccProps =@{
+            ClassName=  "Win32_Service";
+            Property=   "StartName"
+        }
+
     }
     process {
     }
     end {
         $UserAccounts=@()
 
-        $Win32UserAccounts=(Get-CimInstance -ClassName Win32_UserAccount) 
+        $Win32UserAccounts=(Get-CimInstance @UserAccProps) 
         foreach ($account in $Win32UserAccounts) {
             $UserAccounts+=[PSCustomObject]@{
                 Type="Win32_UserAccount"
@@ -42,11 +58,11 @@ function Get-UserAccounts {
                 AccountType=$AccountTypeMap[$account.AccountType];
                 CreationDate=$account.Description;
                 SID=$account.SID;
-                Status=$account.Status;`
+                Status=$account.Status;
             }
         }
 
-        $Win32ServiceAccounts= (Get-CimInstance -ClassName Win32_Service) | Select-Object StartName -Unique 
+        $Win32ServiceAccounts= (Get-CimInstance @$SvcAccProps) | Select-Object StartName -Unique 
         foreach ($account in $Win32ServiceAccounts) {
             $UserAccounts+=[PSCustomObject]@{
                 Type="Win32_ServiceAccount";

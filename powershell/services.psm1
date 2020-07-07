@@ -11,20 +11,34 @@ function Get-Services {
     process {
     }
     end {    
-        $Win32Services = (Get-CimInstance -ClassName Win32_Service) 
-        return [PSCustomObject]@{
-            Name=$Win32Services | Select-Object Name; 
-            DisplayName=$Win32Services | Select-Object DisplayName; 
-            Description=$Win32Services | Select-Object Description; 
-            InstallDate=$Win32Services | Select-Object InstallDate;
-            Imagename=$Win32Services | Select-Object PathName;
-            PID=$Win32Services | Select-Object ProcessId;
-            State=$Win32Services | Select-Object State;
-            Status=$Win32Services | Select-Object Status;
-            Systemname=$Win32Services | Select-Object SystemName;
-            Startmode=$Win32Services | Select-Object StartMode;
-            ServiceAccount=$Win32Services | Select-Object StartName
 
+        $Props=@{
+            Property=   "Name",
+                        "DisplayName",
+                        "Description",
+                        "InstallDate",
+                        "PathName",
+                        "ProcessId",
+                        "State",
+                        "Status",
+                        "SystemName",
+                        "StartMode",
+                        "StartName"
+        }
+
+        $Win32Services = (Get-CimInstance -ClassName Win32_Service @Props) 
+        return [PSCustomObject]@{
+            Name=$Win32Services.Name; 
+            DisplayName=$Win32Services.DisplayName; 
+            Description=$Win32Services.Description; 
+            InstallDate=$Win32Services.InstallDate;
+            Imagename=$Win32Services.PathName;
+            PID=$Win32Services.ProcessId;
+            State=$Win32Services.State;
+            Status=$Win32Services.Status;
+            Systemname=$Win32Services.SystemName;
+            Startmode=$Win32Services.StartMode;
+            ServiceAccount=$Win32Services.StartName
         }
     }
 }

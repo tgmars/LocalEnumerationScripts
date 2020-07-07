@@ -14,12 +14,20 @@ function Get-Processes {
     process {
     }
     end {
+        $Props=@{
+            Property=   "ProcessId",
+                        "ParentProcessId",
+                        "ExecutablePath",
+                        "CommandLine",
+                        "CreationDate",
+                        "ProcessName",
+        }
         $PIDs=Get-Process | Select-Object Id
         
         $CurrentProcs=@()
 
         foreach ($pid in $PIDs.Id){
-            $Win32Proc=Get-CimInstance -ClassName Win32_Process -Filter "ProcessId = $pid"
+            $Win32Proc=Get-CimInstance -ClassName Win32_Process -Filter "ProcessId = $pid" @Props
             $DotNETProc=[System.Diagnostics.Process]::GetProcessById($pid)
             $CurrentProcs+=[PSCustomObject]@{
                 PID=$Win32Proc.ProcessId;
