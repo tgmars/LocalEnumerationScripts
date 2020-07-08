@@ -10,11 +10,11 @@
 - Services snapshot -done (CIM Win32_Service)
 - Current User Accounts  - done (CIM Win32_UserAccount)
 - Current Admin Accounts - done (CIM Win32_UserAccount & Get-LocalGroup)
-- Login History -
-- ARP History -
+- Login History - Done (Get-WinEvent)
+- ARP History - Done (arp -a)
 - Network Connections -
 - Network Interfaces -
-- DNS History -
+- DNS History - ()
 - Scheduled Tasks/CronJobs -
 - Firewall Settings -
 - USB History - wip

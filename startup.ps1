@@ -26,7 +26,10 @@ Get-ChildItem "./powershell" -Filter "*.psm1" -File | ForEach-Object {
 # Write-Object(Get-USBDevices)
 # Write-Object(Get-Pipes)
 # Write-Object(Get-CommandHistory)
-Get-FileContent "C:\Users\Mars\Desktop\1\2.jpg" "C:\Users\Mars\Desktop\1\amplifirouter.jpg"
+# Get-FileContent "C:\Users\Mars\Desktop\1\2.jpg" "C:\Users\Mars\Desktop\1\amplifirouter.jpg"
+# Write-Object(Get-LoginHistory)
+# Write-Object(Get-Arp)
+Write-Object(Get-DNSClientCacheHCM)
 
 # mkdir .\batch\output
 # # Batch startup

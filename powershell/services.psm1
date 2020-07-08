@@ -1,7 +1,8 @@
 function Get-Services {
     <#
     .SYNOPSIS
-        Returns services and their state on the current host
+        Returns services and their state on the current host.
+        TODO - Query windows event logs for ID 4697
     #>    
     [CmdletBinding()]
     param()
