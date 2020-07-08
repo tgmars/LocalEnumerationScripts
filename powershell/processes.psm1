@@ -29,7 +29,6 @@ function Get-Processes {
         $CurrentProcs=@()
 
         foreach ($pid in $PIDs.Id){
-            # $Filter=@{Filter="ProcessId = $pid"}
             $Win32Proc=Get-CimInstance @Props 
             $DotNETProc=[System.Diagnostics.Process]::GetProcessById($pid)
             $CurrentProcs+=[PSCustomObject]@{
