@@ -47,7 +47,7 @@ function Get-Recentfiles {
         # Recurse over all drives in the future
         Get-ChildItem "C:\" -Recurse -File -Force -Attributes Hidden, !Hidden -ErrorAction SilentlyContinue | ForEach-Object {
             if ($_.LastWriteTime -gt (Get-Date).AddHours(-24)){
-            Write-Host "File modified within 24 hours "$_.FullName
+            # Write-Host "File modified within 24 hours "$_.FullName
             $RecentFiles+=$_
             }
         }
