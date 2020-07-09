@@ -2,6 +2,9 @@ function Get-NetInterfaces {
     <#
     .SYNOPSIS
         Retrieves currently connected network interfaces with WMI
+    .REFERENCES
+        https://p0w3rsh3ll.wordpress.com/2013/11/07/get-the-local-ip-addresses/
+        https://devblogs.microsoft.com/scripting/using-powershell-to-find-connected-network-adapters/
     #>        
     [CmdletBinding()]
     param()
