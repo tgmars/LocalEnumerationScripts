@@ -3,7 +3,7 @@
 # ip neighbour
 
 # a for all, u for udp, t for tcp and p for pid/program name
-netstatVar=$(sudo netstat -autp)
+netstatVar=$(sudo netstat -autpn)
 printf "%s\n" "$netstatVar" > ./output/netconns.txt
 
 routingTable=$(netstat -r)
