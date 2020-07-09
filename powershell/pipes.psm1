@@ -16,8 +16,6 @@ function Get-Pipes {
     }
     end {
         $Pipes=@()
-        # return [System.IO.Directory]::GetFiles("\\.\\pipe\\")
-        # (get-childitem \\.\pipe\) | gm
         $PipeListing=[System.IO.Directory]::GetFiles("\\.\\pipe\\")
         foreach ($pipe in $PipeListing) {
             Write-Host($pipe)

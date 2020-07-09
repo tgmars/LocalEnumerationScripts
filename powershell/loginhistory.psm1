@@ -3,7 +3,7 @@ function Get-LoginHistory {
     .SYNOPSIS
         Returns windows events used to track account authentications.
         The returned object contains both the raw output of Get-WinEvent and
-        it converted to XML.
+        it's equivalent XML representation.
         Requires admin permissions. 
     .REFERENCES
         https://devblogs.microsoft.com/scripting/use-filterhashtable-to-filter-event-log-with-powershell/
@@ -30,7 +30,7 @@ function Get-LoginHistory {
                         "4776", #NTLM auth on provider
                         "4768", #TGT granted - successful kerberos auth
                         "4769", #Service ticket granted - access to server resource
-                        "4771"; #kerberos failed login - Preauth failed - 
+                        "4771"; #kerberos failed login - Preauth failed
             StartTime=  "$Time24HoursAgo";
         }
     }

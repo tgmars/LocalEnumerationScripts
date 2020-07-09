@@ -12,18 +12,18 @@
 - Current Admin Accounts - done (CIM Win32_UserAccount & Get-LocalGroup)
 - Login History - Done (Get-WinEvent)
 - ARP History - Done (arp -a)
-- Network Connections -
-- Network Interfaces -
-- DNS History - ()
-- Scheduled Tasks/CronJobs -
-- Firewall Settings -
-- USB History - wip
-- Recently Accessed Files -
+- Network Connections - Done (netstat)
+- Network Interfaces - done (Cim Win32_NetworkAdapterConfiguration)
+- DNS History - (done ipconfig /displaydns)
+- Scheduled Tasks/CronJobs - done (systemroot tasks)
+- Firewall Settings - done (New-object -comObject HNetCfg.FwPolicy2)
+- USB History - done (USBSTOR and PnP events)
+- Recently Accessed Files - done
 - Retrieve File Content - Wip - need to do ADS and Stat
 - Named Pipes - Done (GC & references to Get-Process where a PID can be enumerated)
-- Prefetch Files 
-- Group Policy Configuration - 
-- Autoruns - 
+- Prefetch Files - done (pulls info about the files, not their content)
+- Group Policy Configuration - done
+- Autoruns - wip (need to do psprofiles)
 - Command Line History - done (get-history and contents of psreadline files)
 
 ## Requirements
