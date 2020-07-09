@@ -17,3 +17,4 @@ function Get-OSPatchLevel {
         }
     }
 }
+Export-ModuleMember -Function Get-OSPatchLevel
