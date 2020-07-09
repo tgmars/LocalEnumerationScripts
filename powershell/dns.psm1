@@ -19,7 +19,7 @@ function Get-DNSClientCacheHCM {
         $DNSCache=@()
         $DNSOutput= ipconfig /displaydns
 
-        $CacheEntry=[PSCustomObject]@{
+        $CacheEntryTemplate=@{
             "Record Name"="";
             "Record Type"="";
             "Time To Live"="";
@@ -28,8 +28,12 @@ function Get-DNSClientCacheHCM {
             "A (Host) Record"="";
             "PTR Record"="";
             "CNAME Record"="";
+            "AAAA Record"="";
         }
 
+        $CacheEntry = New-Object PsObject -Property $CacheEntryTemplate
+
+        $FirstRun=$true
         foreach($line in $DNSOutput){
             $RegexOut=[regex]::Matches($line,"\s+([A-Za-z\s\(\)]+)[\.\s]+\:\s([0-9A-Za-z\.\-]+)")
 
@@ -37,20 +41,21 @@ function Get-DNSClientCacheHCM {
                 $CurrentKey=($RegexOut.Captures.Groups[1].Value).Trim()
                 $CurrentVal=($RegexOut.Captures.Groups[2].Value).Trim()
 
-                if($CurrentKey -match "Record\sName"){
+                if($CurrentKey -match "Record\sName" -and $FirstRun -eq $false){
                     # Do a 'deep copy' here otherwise our knowledge of $CacheEntry is having its reference
                     # passed to DNSCache rather that its value
                     $TempObj=$CacheEntry | ConvertTo-Csv -NoTypeInformation | ConvertFrom-Csv
                     $DNSCache+=$TempObj
                     # Reset each field back to nil
-                    ($CacheEntry | Get-Member -MemberType NoteProperty).Name | ForEach-Object {
-                        $CacheEntry.$_=""
-                    }
+                    $CacheEntry = New-Object PsObject -Property $CacheEntryTemplate
                 }
                 $CacheEntry.$CurrentKey = $CurrentVal
+                $FirstRun=$false
             }
         }
-       return $DNSCache
+        # Return the last object that doesn't get assigned in the main loop. 
+        $DNSCache+=$CacheEntry
+        return $DNSCache
     }
 }
 
