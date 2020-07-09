@@ -9,45 +9,50 @@ function Get-USBDevices {
     begin {
         Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)
 
-        $QueriesToEnumerate=@(
-            # Identify vendor/friendlyname of device
-            "HKLM:SYSTEM\CurrentControlSet\Enum\*";
-            # "HKLM:SYSTEM\CurrentControlSet\Enum\\";
-            # GUID to track user back to device
-            "HKLM:SYSTEM\MountedDevices\"
-        )   
-        $NonStandardQueries=@(
-            "REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\MountPoints2" 
-        )
-        # PnP installation of device
-        $EventLogQuery=@{
+        $USBSTOR="Registry::HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum\USBSTOR\"
+        
+        # Not pulling these keys back yet - placeholders for once there's more context about how 
+        # usb data is correlated within DCOT.
+        # $MountedDevices="Registry::HKEY_LOCAL_MACHINE:SYSTEM\MountedDevices\"
+        # $UserMountPoints="REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\MountPoints2\" 
+
+        $Time24HoursAgo=(Get-Date).AddHours(-24)
+        Write-Host($Time24HoursAgo)
+
+        $PNPEventQuery=@{
             Logname=    "System";
-            InstanceId= 20001;
+            ID=         "20001";
+            StartTime=  "$Time24HoursAgo";
         }
+        
     }
     process {
     }
     end {
-
         $USBDevices=@()
- 
-        foreach ($query in $QueriesToEnumerate){
-            Write-Host $query 
 
-            $QueryResults=Get-ItemProperty $query
-            Write-Host $QueryResults 
-
-            foreach ($key in $QueryResults) {
-                # $USBDevices+=[PSCustomObject]@{
-                #     SourceKey=$key.PSParentPath;
-                #     DisplayName=$key.DisplayName;
-                #     Version=$key.DisplayVersion;
-                #     Publisher=$key.Publisher;
-                #     InstallDate=$key.InstallDate;
-                # }
+        foreach($Device in Get-ChildItem $USBSTOR){
+            $Device=$Device -replace "HKEY_LOCAL_MACHINE","HKLM:"
+            $DeviceID=(Get-ChildItem $Device)
+            $DeviceID=$DeviceID -replace "HKEY_LOCAL_MACHINE","HKLM:"
+            Get-ItemProperty -Path $DeviceID | ForEach-Object {
+                # $testvar=($_ | Get-Member -MemberType NoteProperty)
+                # $testvar = ($_ | Get-Member -MemberType Property)
+                $USBDevices+=$_.HardwareID
+                Write-Host($_.$_)
             }
         }
-        return $InstalledSoftware
+
+        $Events=Get-WinEvent -ErrorAction SilentlyContinue -FilterHashtable $PNPEventQuery
+        if($Events.Length -gt 0){
+            $USBDevices+=[PSCustomObject]@{
+                Type="PlugnPlayEvents"
+                RawEvents=$Events
+                XMLEvents=$Events | ConvertTo-XML -Depth 99
+                # StructuredEvents=$Events | ConvertTo-XML
+            }  
+        }
+        return $USBDevices
     }
 }
 
