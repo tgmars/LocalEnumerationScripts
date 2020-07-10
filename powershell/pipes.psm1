@@ -3,6 +3,7 @@ function Get-Pipes {
     <#
     .SYNOPSIS
         Returns named pipes, sysinternals pipes may be a better use here.
+        Enumerates associated processes for named pipes pids in their names.
     .REFERENCE
         https://stackoverflow.com/questions/258701/how-can-i-get-a-list-of-all-open-named-pipes-in-windows
         MOJO Pipes -https://chromium.googlesource.com/chromium/src.git/+/master/mojo/README.md
@@ -18,7 +19,6 @@ function Get-Pipes {
         $Pipes=@()
         $PipeListing=[System.IO.Directory]::GetFiles("\\.\\pipe\\")
         foreach ($pipe in $PipeListing) {
-            Write-Host($pipe)
             $PipeProc=-999999     
             $ProcName='unknown'       
             
