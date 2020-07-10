@@ -1,8 +1,7 @@
 function Get-GroupsAndUsers {
     <#
     .SYNOPSIS
-        Only enumerates local groups and their users. This identifies admin accounts based on 
-        whether they're present in the local Administrator group.
+        Enumerates local groups 
     .REFERENCE
         https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-powershell-1.0/ff730963(v=technet.10)?redirectedfrom=MSDN
         https://stackoverflow.com/questions/5072996/how-to-get-all-groups-that-a-user-is-a-member-of
@@ -17,16 +16,27 @@ function Get-GroupsAndUsers {
     end {
         $AllGroups=@()
 
-        $LocalGroups=(Get-LocalGroup) 
+        $LocalGroups=(Get-CimInstance -ClassName Win32_Group -Filter "domain='$env:COMPUTERNAME'" | Select-Object Name, SID)
         foreach ($groups in $LocalGroups) {
-            $UsersInCurrentGroup=Get-LocalGroupMember $groups
+            $accounts=@()
+            $GrabUsers=$false
+            net localgroup $groups.Name | ForEach-Object {
+                if($_ -match "command\scompleted"){
+                    $GrabUsers=$false
+                }
+                if($GrabUsers -eq $true -and [string]::IsNullOrWhiteSpace($_) -eq $false){
+                    $accounts+=$_
+                }
+                if($_ -match "--------"){
+                    $GrabUsers=$true
+                }
+
+            }
             $AllGroups+=[PSCustomObject]@{
                 Type="LocalGroups"
                 Name=$groups.Name;
                 SID=$groups.SID;
-                Description=$account.Description;
-                PrincipalSource=$groups.PrincipalSource;
-                Users=$UsersInCurrentGroup;
+                Users=$accounts
             }
         }
         return $AllGroups
