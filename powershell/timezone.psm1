@@ -12,7 +12,7 @@ function Get-TZ {
     }
     end {
         return [PSCustomObject]$TZ=@{
-            TimeZone=(Get-TimeZone) | Select-Object BaseUtcOffset 
+            TimeZone=[System.TimeZone]::CurrentTimeZone | Select-Object StandardName 
         }
     }
 }
