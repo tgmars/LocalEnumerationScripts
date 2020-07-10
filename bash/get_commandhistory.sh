@@ -1,5 +1,5 @@
 #!/bin/bash -e
-# Runs history and grabs content of all users .bash_history files
+# Runs history (not useful) and grabs content of all users .bash_history files (very useful)
 
 cmdlinehistory="./output/command_history.txt"
 

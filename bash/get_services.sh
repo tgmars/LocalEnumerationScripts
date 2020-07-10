@@ -1,5 +1,6 @@
 #!/bin/bash -e
 #
+# Grab linux services known by service and initctl daemons.
 # Refs:
 # https://askubuntu.com/questions/407075/how-to-read-service-status-all-results
 

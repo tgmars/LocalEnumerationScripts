@@ -1,8 +1,8 @@
 #!/bin/bash -e
-
-# ip neighbour
-
+# 
+# Grab networking information with netstat.
 # a for all, u for udp, t for tcp and p for pid/program name
+# Need to be root to enumerate the process name associated with the pid
 netstatVar=$(sudo netstat -autpn)
 printf "%s\n" "$netstatVar" > ./output/netconns.txt
 

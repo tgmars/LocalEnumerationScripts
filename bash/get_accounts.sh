@@ -1,6 +1,6 @@
 #!/bin/bash -e
 #
-# Refs:
+# Enumerates contents of /etc/passwd to output account names
 
 # Alternative just cat /etc/passwd
 printf "username,groups\n" > ./output/accounts.csv

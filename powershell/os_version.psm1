@@ -19,3 +19,5 @@ function Get-OSVersion {
         }
     }
 }
+Export-ModuleMember -Function Get-OSVersion
+

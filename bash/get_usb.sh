@@ -4,7 +4,8 @@
 # Refs:
 # https://stackoverflow.com/questions/13890789/convert-dmesg-timestamp-to-custom-date-format
 
-# Absolutely stolen from Allen Belletti's answer in the above SO link.
+# Using Allen Belletti's answer in the above SO link to convert the dmesg kernel uptimeseconds 
+# to a usable time format.
 dmesg_with_human_timestamps () {
     FORMAT="%a %b %d %H:%M:%S %Y"
 

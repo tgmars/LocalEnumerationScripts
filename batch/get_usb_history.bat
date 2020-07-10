@@ -14,6 +14,12 @@ set outputVar="usbOutput"
 REM Pass the values (command to be excuted & name of variable to store output in) to the function.
 call:setCmdOutput %command% %outputVar%
 
+set command="reg query HKLM\SYSTEM\CurrentControlSet\Enum\USBSTOR /s"
+set outputVar="usbStorOutput"
+
+REM Pass the values (command to be excuted & name of variable to store output in) to the function.
+call:setCmdOutput %command% %outputVar%
+
 :setCmdOutput    
 REM               -- Store the output of the command specified in param 1 in an array named by param 2.
 REM               -- %~1: command to store output of

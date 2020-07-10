@@ -1,6 +1,9 @@
 @echo off
 SETLOCAL
 
+REM Gets modified, created and access timestamps for prefetch files
+REM and outputs them in a csv
+
 REM Start of main execution
 echo prefetch.bat
 REM Specify the command to execute

@@ -2,10 +2,6 @@
 #
 # Uses dpkg to list installed packages on the system
 
-# dpkgVar=$(dpkg --list)
-
-# printf "%s\n" "$dpkgVar" > ./output/software.txt
-
 declare -a package
 declare -a version
 

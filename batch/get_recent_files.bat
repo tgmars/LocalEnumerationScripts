@@ -1,8 +1,9 @@
 @echo off
-
 SETLOCAL ENABLEDELAYEDEXPANSION 
 SETLOCAL ENABLEEXTENSIONS
-SETLOCAL
+
+REM Enumerates recentfiles directory and the timestamps of the files
+REM to provide indication of when the referenced file was created
 
 REM Start of main execution
 echo recentfiles.bat

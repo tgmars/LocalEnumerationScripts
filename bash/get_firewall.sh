@@ -1,5 +1,9 @@
 #!/bin/bash -e
 # 
+# Retrieves rules for each of iptables' different chains.
+# Grabbing everything so that we've got view of the hosts firewall
+# Data is marked up with the name of the table using a @prop flag.
+# If the host supports iptables-save, suggest using it instead! (code below)
 
 # iptablesVar=$(iptables-save)
 # printf "%s\n" "$iptablesVar"  | tee ./output/firewall.txt

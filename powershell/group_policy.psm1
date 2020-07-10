@@ -45,7 +45,7 @@ function Get-GroupPolicy {
             $PreviousLine=$Line
         }
 
-        # Feels bad
+        # Feels bad but gpresult output is trash and cbf doing this nicely
         # Requires admin privs
         $GPCompOutput=gpresult /SCOPE:COMPUTER /v
         $GPCompOutput=$GPCompOutput[7..$GPCompOutput.Length]

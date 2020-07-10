@@ -2,8 +2,7 @@ function Get-Accounts {
     <#
     .SYNOPSIS
         Return all user accounts of the current host. If run on a workstation or server,
-        return local & service accounts. If run on a domain controller, return AD accounts
-        in addition to local & service accs. 
+        return local & service accounts. 
     .REFERENCE
         https://getadmx.com/?Category=Windows_10_2016&Policy=Microsoft.Policies.WindowsLogon::EnumerateLocalUsers
 
@@ -13,7 +12,7 @@ function Get-Accounts {
     begin {
         Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)
 
-        # AccountType vallues returned by CIM class Win32_UserAccount are uint32
+        # AccountType values returned by CIM class Win32_UserAccount are uint32
         # These only match on accountTypes that map nicely to one of the following flags
         # Should write some logic to calculate the account types for a given set of flags that
         # don't have an entry in the map.

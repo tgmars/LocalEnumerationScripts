@@ -1,7 +1,7 @@
 function Get-GroupsAndUsers {
     <#
     .SYNOPSIS
-        Enumerates local groups 
+        Enumerates local groups using Win32_Group and net localgroup output
     .REFERENCE
         https://docs.microsoft.com/en-us/previous-versions/windows/it-pro/windows-powershell-1.0/ff730963(v=technet.10)?redirectedfrom=MSDN
         https://stackoverflow.com/questions/5072996/how-to-get-all-groups-that-a-user-is-a-member-of

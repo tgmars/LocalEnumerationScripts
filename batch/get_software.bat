@@ -3,6 +3,8 @@
 SETLOCAL ENABLEDELAYEDEXPANSION 
 SETLOCAL ENABLEEXTENSIONS
 
+REM Enumerates Uninstall keys to identify installed software.
+
 REM Start of main execution
 echo software.bat
 REM Specify the command to execute

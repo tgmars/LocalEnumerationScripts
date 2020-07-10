@@ -2,7 +2,7 @@
 SETLOCAL ENABLEEXTENSIONS
 SETLOCAL ENABLEDELAYEDEXPANSION
 
-REM auditpol /set /category:"Logon/Logoff" /success:enable /failure:enable
+REM Use eventquery.vbs to enumerate log entries
 
 REM Start of main execution
 echo logon_history.bat > .\batch\output\login_audit.csv

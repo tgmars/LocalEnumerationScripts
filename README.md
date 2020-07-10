@@ -19,11 +19,11 @@
 - Firewall Settings - done (New-object -comObject HNetCfg.FwPolicy2)
 - USB History - done (USBSTOR and PnP events)
 - Recently Accessed Files - done
-- Retrieve File Content - Wip - need to do ADS and Stat
+- Retrieve File Content - done - v2 should include ADS, Stat and strings
 - Named Pipes - Done (GC & references to Get-Process where a PID can be enumerated)
 - Prefetch Files - done (pulls info about the files, not their content)
 - Group Policy Configuration - done
-- Autoruns - wip (need to do psprofiles)
+- Autoruns - Done - v2 should enumerate psprofiles
 - Command Line History - done (get-history and contents of psreadline files)
 
 ## Requirements

@@ -17,3 +17,4 @@ function Get-Timestamp {
     }
 }
 
+Export-ModuleMember -Function Get-Timestamp

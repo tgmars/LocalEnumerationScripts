@@ -1,4 +1,6 @@
 #!/bin/bash -e
+# 
+# Enumerates user cron entries and /etc/crontab
 
 cronout="./output/cron.txt"
 

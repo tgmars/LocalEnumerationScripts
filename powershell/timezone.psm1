@@ -1,7 +1,7 @@
-function Get-TZ {
+function Get-TimeZoneHCM {
     <#
     .SYNOPSIS
-        Returns the offset from UTC time of the current system.
+        Returns the textual timezone of the current system
     #>
     [CmdletBinding()]
     param()
@@ -16,3 +16,5 @@ function Get-TZ {
         }
     }
 }
+
+Export-ModuleMember -Function Get-TimeZoneHCM
