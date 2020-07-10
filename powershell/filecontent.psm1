@@ -3,8 +3,7 @@ function Get-FileContent {
     <#
     .SYNOPSIS
         Get file content
-        Get ADS from files 
-        Get stat of files
+        TODO: Get ADS from files,Get stat of files,Strings equiv
 
     .REFERENCE
         https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.management/get-content?view=powershell-7
