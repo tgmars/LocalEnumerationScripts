@@ -10,7 +10,6 @@ function Get-GroupsAndUsers {
     [CmdletBinding()]
     param()
     begin {
-        Import-Module ActiveDirectory
         Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)     
     }
     process {

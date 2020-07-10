@@ -11,7 +11,6 @@ function Get-Accounts {
     [CmdletBinding()]
     param()
     begin {
-        Import-Module ActiveDirectory
         Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)
 
         # AccountType vallues returned by CIM class Win32_UserAccount are uint32
