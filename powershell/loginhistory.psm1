@@ -14,7 +14,7 @@ function Get-LoginHistory {
         Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)
 
         $Time24HoursAgo=(Get-Date).AddHours(-24)
-        Write-Host($Time24HoursAgo)
+        # Write-Host($Time24HoursAgo)
 
         $EventLogQuery=@{
             Logname=    "Security";

@@ -17,7 +17,7 @@ function Get-USBDevices {
         # $UserMountPoints="REGISTRY::HKEY_USERS\*\Software\Microsoft\Windows\CurrentVersion\Explorer\MountPoints2\" 
 
         $Time24HoursAgo=(Get-Date).AddHours(-24)
-        Write-Host($Time24HoursAgo)
+        # Write-Host($Time24HoursAgo)
 
         $PNPEventQuery=@{
             Logname=    "System";
@@ -39,7 +39,6 @@ function Get-USBDevices {
                 # $testvar=($_ | Get-Member -MemberType NoteProperty)
                 # $testvar = ($_ | Get-Member -MemberType Property)
                 $USBDevices+=$_.HardwareID
-                Write-Host($_.$_)
             }
         }
 

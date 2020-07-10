@@ -18,7 +18,7 @@ function Get-SchedTasks {
 
         Get-ChildItem -Path $System32TaskPath -Recurse -File -Force  | Select-Object FullName | ForEach-Object {
             $CurrentPath=$_.FullName
-            Write-Host($CurrentPath)
+            # Write-Host($CurrentPath)
             [XML]$tempvar=Get-Content $CurrentPath
             $Tasks+=$tempvar
             # Write-Object($tempvar.Task.RegistrationInfo)
@@ -26,7 +26,7 @@ function Get-SchedTasks {
 
         Get-ChildItem -Path $SystemRootTaskPath -Recurse -File -Force  | Select-Object FullName | ForEach-Object {
             $CurrentPath=$_.FullName
-            Write-Host($CurrentPath)
+            # Write-Host($CurrentPath)
             [XML]$tempvar=Get-Content $CurrentPath
             $Tasks+=$tempvar
             # Write-Object($tempvar.Task.RegistrationInfo)

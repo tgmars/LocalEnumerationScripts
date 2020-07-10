@@ -9,8 +9,6 @@ function Get-OSVersion {
         Write-Host($PSCmdlet.MyInvocation.MyCommand.Name)
     }
     process {
-        $localVariable = 
-        Write-Host($localVariable)
     }
     end {
         return [PSCustomObject]$OSVersion=@{

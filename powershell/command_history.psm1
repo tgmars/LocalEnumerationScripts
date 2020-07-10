@@ -20,7 +20,7 @@ function Get-CommandHistory {
         $CommandHistories=@()
 
         Get-ChildItem "C:\Users\*\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\*" -File | ForEach-Object {
-            Write-Host($_.FullName)
+            # Write-Host($_.FullName)
             $CommandHistories+=[PSCustomObject]@{
                 Type="PSReadlineFile"
                 FilePath = $_.FullName
