@@ -1,6 +1,8 @@
 # LocalEnumerationScripts
 
-## Tasks to complete (Powershell)
+A bunch of scripts that enumerate various forensically relevant information from CentOS and Windows back to XP. 
+
+### Tasks to complete (Powershell)
 - Operating System and Version - done (CIM Win32_OS)
 - Operating System Patch Level - done (CIM QFE)
 - Current Timestamp - done (Get date)
@@ -26,13 +28,13 @@
 - Autoruns - Done - v2 should enumerate psprofiles
 - Command Line History - done (get-history and contents of psreadline files)
 
-## Requirements
+### Requirements
 - Bash - Ubuntu 10.04 or Centos 5.4
 - Batch - Windows XP Service Pack 3
 - PowerShell - Version 3 
 
 
-#### Batch
+### Batch
 - Operating System and Version - done
 - Operating System Patch Level - done, but could be more granular (wmi)
 - Current Timestamp - done (wmi)
@@ -58,7 +60,7 @@
 - Autoruns - done (wmi)
 - Command Line History - done (doskey /history)
 
-#### Bash
+### Bash
 - Operating System and Version - done (lsb_release -a)
 - Operating System Patch Level - done (apt/history.log and dpkg.log)
 - Current Timestamp - done (date)
