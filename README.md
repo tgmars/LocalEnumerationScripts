@@ -29,7 +29,7 @@
 ## Requirements
 - Bash - Ubuntu 10.04 or Centos 5.4
 - Batch - Windows XP Service Pack 3
-- PowerShell - Version 3, load .NET functionality if req'd, can use sysinternals if justified, need style guide.  
+- PowerShell - Version 3 
 
 
 #### Batch
